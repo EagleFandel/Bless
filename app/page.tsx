@@ -115,7 +115,7 @@ export default function Home() {
           {isEditMode ? (
             <Editor content={content} onChange={setContent} />
           ) : (
-            <div className="overflow-auto bg-[#1a1a1a] h-full px-3 pt-3 pb-20">
+            <div className="overflow-auto bg-[#1a1a1a] h-full px-3 pt-3">
               <Preview content={content} />
             </div>
           )}

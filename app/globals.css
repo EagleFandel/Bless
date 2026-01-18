@@ -157,67 +157,67 @@ body {
   color: #e0e0e0 !important;
 }
 
-/* Apple Watch 优化 - 极简风格 */
+/* Apple Watch 优化 - 极简风格，最大化显示 */
 @media (max-width: 250px) {
   body {
-    font-size: 10px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.6;
     background-color: #000;
     color: #fff;
   }
   
   .preview-watch {
-    padding: 0.5rem;
-    font-size: 10px;
+    padding: 0.2rem;
+    font-size: 12px;
   }
   
   .preview-watch h1 {
-    font-size: 1.4em;
-    margin: 0.8em 0 0.4em 0;
+    font-size: 1.5em;
+    margin: 0.6em 0 0.3em 0;
     font-weight: 600;
     border-bottom: none;
   }
   
   .preview-watch h2 {
-    font-size: 1.3em;
-    margin: 0.7em 0 0.3em 0;
+    font-size: 1.4em;
+    margin: 0.5em 0 0.3em 0;
     font-weight: 600;
     border-bottom: none;
   }
   
   .preview-watch h3 {
-    font-size: 1.2em;
-    margin: 0.6em 0 0.3em 0;
-    font-weight: 600;
-  }
-  
-  .preview-watch h4, .preview-watch h5, .preview-watch h6 {
-    font-size: 1.1em;
+    font-size: 1.3em;
     margin: 0.5em 0 0.2em 0;
     font-weight: 600;
   }
   
+  .preview-watch h4, .preview-watch h5, .preview-watch h6 {
+    font-size: 1.2em;
+    margin: 0.4em 0 0.2em 0;
+    font-weight: 600;
+  }
+  
   .preview-watch p {
-    margin: 0 0 0.6em 0;
+    margin: 0 0 0.5em 0;
   }
   
   .preview-watch code {
-    font-size: 0.9em;
+    font-size: 0.95em;
     padding: 0.1em 0.3em;
     background-color: #222;
   }
   
   .preview-watch pre {
-    padding: 0.4em;
-    font-size: 0.85em;
+    padding: 0.3em;
+    font-size: 0.9em;
     overflow-x: auto;
     background-color: #222;
-    margin: 0.5em 0;
+    margin: 0.4em 0;
   }
   
   .preview-watch ul, .preview-watch ol {
     padding-left: 1.5em;
-    margin: 0 0 0.6em 0;
+    margin: 0 0 0.5em 0;
   }
   
   .preview-watch li {
@@ -225,8 +225,8 @@ body {
   }
   
   .preview-watch table {
-    font-size: 0.85em;
-    margin: 0.5em 0;
+    font-size: 0.9em;
+    margin: 0.4em 0;
   }
   
   .preview-watch th, .preview-watch td {
@@ -240,22 +240,22 @@ body {
   
   .preview-watch blockquote {
     border-left-color: #444;
-    padding-left: 0.8em;
-    margin: 0.5em 0;
+    padding-left: 0.6em;
+    margin: 0.4em 0;
   }
   
   .preview-watch hr {
     border-top-color: #333;
-    margin: 1em 0;
+    margin: 0.8em 0;
   }
   
   /* KaTeX 公式在 Watch 上的优化 */
   .preview-watch .katex {
-    font-size: 0.95em;
+    font-size: 1em;
   }
   
   .preview-watch .katex-display {
-    margin: 0.6em 0;
+    margin: 0.5em 0;
     overflow-x: auto;
   }
   
@@ -278,6 +278,7 @@ body {
   .editor {
     font-size: 16px;
     padding: 0.75rem;
+    padding-bottom: 5rem; /* 为底部按钮留出更多空间 */
   }
   
   /* 防止 iOS 自动缩放 */
@@ -289,6 +290,7 @@ body {
   .preview {
     font-size: 15px;
     line-height: 1.7;
+    padding-bottom: 5rem; /* 为底部按钮留出空间 */
   }
   
   .preview h1 {
