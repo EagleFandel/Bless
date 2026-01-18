@@ -70,7 +70,13 @@ export default function Editor({ content, onChange }: EditorProps) {
   return (
     <div className="relative h-full flex flex-col bg-[#1a1a1a]">
       {/* 工具栏 */}
-      <div className="flex gap-2 p-2 border-b border-gray-700 bg-[#0d0d0d] flex-shrink-0">
+      <div className="flex justify-end gap-2 p-2 border-b border-gray-700 bg-[#0d0d0d] flex-shrink-0">
+        {hasSelection && (
+          <span className="text-xs text-gray-400 self-center mr-auto">
+            已选中文本
+          </span>
+        )}
+        
         <button
           onClick={handleSelectAll}
           className="px-3 py-1.5 bg-[#2d2d2d] border border-gray-600 rounded hover:bg-[#3d3d3d] transition-colors text-sm flex items-center gap-1 text-gray-200"
@@ -92,12 +98,6 @@ export default function Editor({ content, onChange }: EditorProps) {
           </svg>
           {hasSelection ? '替换' : '粘贴'}
         </button>
-        
-        {hasSelection && (
-          <span className="text-xs text-gray-400 self-center ml-2">
-            已选中文本
-          </span>
-        )}
       </div>
 
       {/* 编辑器 */}

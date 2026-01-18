@@ -11,7 +11,7 @@ interface PreviewProps {
 
 export default function Preview({ content, isWatch = false }: PreviewProps) {
   return (
-    <div className={`preview ${isWatch ? "text-sm" : "p-6"}`}>
+    <div className={`preview p-6 ${isWatch ? "text-sm" : ""}`}>
       <ReactMarkdown
         remarkPlugins={[remarkMath]}
         rehypePlugins={[rehypeKatex]}

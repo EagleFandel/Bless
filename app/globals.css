@@ -37,14 +37,57 @@ body {
 .preview {
   background-color: #1a1a1a;
   color: #e0e0e0;
+  min-height: 100%;
+  line-height: 1.8;
+}
+
+.preview > * {
+  margin-bottom: 1em;
+}
+
+.preview > *:last-child {
+  margin-bottom: 0;
 }
 
 .preview h1, .preview h2, .preview h3, .preview h4, .preview h5, .preview h6 {
   color: #ffffff;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.preview h1 {
+  font-size: 2em;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.3em;
+}
+
+.preview h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.3em;
+}
+
+.preview h3 {
+  font-size: 1.25em;
+}
+
+.preview p {
+  margin-bottom: 1em;
 }
 
 .preview a {
   color: #60a5fa;
+  text-decoration: underline;
+}
+
+.preview ul, .preview ol {
+  padding-left: 2em;
+  margin-bottom: 1em;
+}
+
+.preview li {
+  margin-bottom: 0.5em;
 }
 
 .preview code {
@@ -52,6 +95,8 @@ body {
   color: #e0e0e0;
   padding: 0.2em 0.4em;
   border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
 }
 
 .preview pre {
@@ -59,6 +104,7 @@ body {
   padding: 1em;
   border-radius: 5px;
   overflow-x: auto;
+  margin-bottom: 1em;
 }
 
 .preview pre code {
@@ -70,20 +116,36 @@ body {
   border-left: 4px solid #444;
   padding-left: 1em;
   color: #999;
+  margin: 1em 0;
+  font-style: italic;
 }
 
 .preview table {
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 1em;
 }
 
 .preview th, .preview td {
   border: 1px solid #444;
   padding: 0.5em;
+  text-align: left;
 }
 
 .preview th {
   background-color: #2d2d2d;
+  font-weight: 600;
+}
+
+.preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.preview hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 2em 0;
 }
 
 /* KaTeX 深色主题适配 */
