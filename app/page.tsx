@@ -38,7 +38,7 @@ export default function Home() {
 
   const pullToRefresh = usePullToRefresh({
     onRefresh: handleRefresh,
-    threshold: 80,
+    threshold: 50, // 降低阈值，更容易触发
   });
 
   // 保存函数
@@ -89,10 +89,13 @@ export default function Home() {
     );
   }
 
-  // Apple Watch: 纯阅读模式 - 优化超小屏幕显示
+  // Apple Watch: 纯阅读模式 - 极简设计，支持滚轮刷新
   if (isWatch) {
     return (
-      <div className="min-h-screen bg-[#1a1a1a] text-white p-1">
+      <div className="min-h-screen bg-black text-white">
+        {/* 下拉刷新指示器 - Watch 专用 */}
+        <PullToRefreshIndicator {...pullToRefresh} />
+        
         <div className="preview-watch">
           <Preview content={content} isWatch={true} />
         </div>

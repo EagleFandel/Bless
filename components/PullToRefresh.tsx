@@ -17,39 +17,20 @@ export default function PullToRefreshIndicator({
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 flex items-center justify-center transition-all duration-200 z-40 bg-[#1a1a1a]"
+      className="fixed top-0 left-0 right-0 flex items-center justify-center transition-all duration-200 z-40 bg-black"
       style={{
-        height: `${pullDistance}px`,
-        opacity: Math.min(pullDistance / 80, 1),
+        height: `${Math.min(pullDistance, 60)}px`,
+        opacity: Math.min(pullDistance / 60, 1),
       }}
     >
-      <div className="flex flex-col items-center gap-2 text-gray-300">
+      <div className="flex items-center gap-2 text-white text-xs">
         {isRefreshing ? (
           <>
-            <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            <span className="text-sm">刷新中...</span>
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            <span>刷新中</span>
           </>
         ) : (
-          <>
-            <svg
-              className={`w-6 h-6 transition-transform ${
-                shouldTrigger ? 'rotate-180' : ''
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-            <span className="text-sm">
-              {shouldTrigger ? '松开刷新' : '下拉刷新'}
-            </span>
-          </>
+          <span>{shouldTrigger ? '↓' : '↓'}</span>
         )}
       </div>
     </div>
