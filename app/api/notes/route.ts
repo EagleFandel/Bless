@@ -20,9 +20,10 @@ export async function GET(request: NextRequest) {
 // 保存笔记
 export async function POST(request: NextRequest) {
   const deviceId = request.headers.get("x-device-id") || "default";
-  const { content } = await request.json();
-
+  
   try {
+    const { content } = await request.json();
+
     const existingNote = await prisma.note.findFirst({
       where: { deviceId },
     });
@@ -40,6 +41,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json({ success: false, error: String(error) }, { status: 500 });
+    console.error("Database error:", error);
+    return NextResponse.json(
+      { success: false, error: error instanceof Error ? error.message : String(error) },
+      { status: 500 }
+    );
   }
 }
