@@ -9,7 +9,7 @@ import { useDeviceDetect } from "@/hooks/useDeviceDetect";
 function getDeviceId() {
   let deviceId = localStorage.getItem("formuless-device-id");
   if (!deviceId) {
-    deviceId = `device-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    deviceId = `device-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
     localStorage.setItem("formuless-device-id", deviceId);
   }
   return deviceId;
@@ -18,6 +18,7 @@ function getDeviceId() {
 export default function Home() {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditMode, setIsEditMode] = useState(false); // 默认预览模式
   const { isWatch, isMobile } = useDeviceDetect();
 
   // 从服务器加载内容
@@ -82,24 +83,86 @@ export default function Home() {
     );
   }
 
-  // 手机端: 编辑模式
+  // 手机端: 可切换的编辑/预览模式
   if (isMobile) {
     return (
-      <div className="min-h-screen bg-white">
-        <Editor content={content} onChange={setContent} />
+      <div className="min-h-screen bg-white relative">
+        {/* 模式切换按钮 */}
+        <button
+          onClick={() => setIsEditMode(!isEditMode)}
+          className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+        >
+          {isEditMode ? (
+            <>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              预览
+            </>
+          ) : (
+            <>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+              编辑
+            </>
+          )}
+        </button>
+        
+        {isEditMode ? (
+          <Editor content={content} onChange={setContent} />
+        ) : (
+          <div className="overflow-auto bg-gray-50 min-h-screen pt-16 px-4">
+            <Preview content={content} />
+          </div>
+        )}
       </div>
     );
   }
 
-  // 桌面端: 左右分栏
+  // 桌面端: 默认预览模式，可切换到编辑或分栏模式
   return (
-    <div className="flex h-screen">
-      <div className="w-1/2 border-r">
-        <Editor content={content} onChange={setContent} />
-      </div>
-      <div className="w-1/2 overflow-auto bg-gray-50">
-        <Preview content={content} />
-      </div>
+    <div className="flex h-screen relative">
+      {/* 模式切换按钮 */}
+      <button
+        onClick={() => setIsEditMode(!isEditMode)}
+        className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+      >
+        {isEditMode ? (
+          <>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            预览模式
+          </>
+        ) : (
+          <>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            编辑模式
+          </>
+        )}
+      </button>
+
+      {isEditMode ? (
+        // 编辑模式：左右分栏
+        <>
+          <div className="w-1/2 border-r">
+            <Editor content={content} onChange={setContent} />
+          </div>
+          <div className="w-1/2 overflow-auto bg-gray-50">
+            <Preview content={content} />
+          </div>
+        </>
+      ) : (
+        // 预览模式：全屏预览
+        <div className="w-full overflow-auto bg-gray-50 p-8">
+          <Preview content={content} />
+        </div>
+      )}
     </div>
   );
 }
