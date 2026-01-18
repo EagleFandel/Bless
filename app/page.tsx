@@ -21,6 +21,26 @@ export default function Home() {
   const [isEditMode, setIsEditMode] = useState(false); // 默认预览模式
   const { isWatch, isMobile } = useDeviceDetect();
 
+  // 保存函数
+  const saveContent = (contentToSave: string) => {
+    const deviceId = getDeviceId();
+    
+    // 同时保存到 localStorage（降级方案）
+    localStorage.setItem("formuless-content", contentToSave);
+    
+    // 保存到服务器
+    fetch("/api/notes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-device-id": deviceId,
+      },
+      body: JSON.stringify({ content: contentToSave }),
+    }).catch(() => {
+      // 静默失败，已有 localStorage 兜底
+    });
+  };
+
   // 从服务器加载内容
   useEffect(() => {
     const deviceId = getDeviceId();
@@ -45,26 +65,17 @@ export default function Home() {
     if (isLoading) return;
 
     const timer = setTimeout(() => {
-      const deviceId = getDeviceId();
-      
-      // 同时保存到 localStorage（降级方案）
-      localStorage.setItem("formuless-content", content);
-      
-      // 保存到服务器
-      fetch("/api/notes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-device-id": deviceId,
-        },
-        body: JSON.stringify({ content }),
-      }).catch(() => {
-        // 静默失败，已有 localStorage 兜底
-      });
+      saveContent(content);
     }, 500);
     
     return () => clearTimeout(timer);
   }, [content, isLoading]);
+
+  // 切换模式时立即保存
+  const handleModeToggle = () => {
+    saveContent(content);
+    setIsEditMode(!isEditMode);
+  };
 
   if (isLoading) {
     return (
@@ -89,7 +100,7 @@ export default function Home() {
       <div className="min-h-screen bg-white relative">
         {/* 模式切换按钮 */}
         <button
-          onClick={() => setIsEditMode(!isEditMode)}
+          onClick={handleModeToggle}
           className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
         >
           {isEditMode ? (
@@ -126,7 +137,7 @@ export default function Home() {
     <div className="flex h-screen relative">
       {/* 模式切换按钮 */}
       <button
-        onClick={() => setIsEditMode(!isEditMode)}
+        onClick={handleModeToggle}
         className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
       >
         {isEditMode ? (
