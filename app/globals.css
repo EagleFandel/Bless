@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* KaTeX CSS */
+@import 'katex/dist/katex.min.css';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* 极简编辑器样式 */
+.editor {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  line-height: 1.6;
+  resize: none;
+}
+
+/* Apple Watch 优化 */
+@media (max-width: 200px) {
+  body {
+    font-size: 12px;
+  }
+  .preview {
+    padding: 0.5rem;
+  }
+}
+
+/* 手机端优化 */
+@media (max-width: 768px) {
+  .editor {
+    font-size: 16px;
+    padding: 1rem;
+  }
+}
