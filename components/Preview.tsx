@@ -25,13 +25,13 @@ export default function Preview({ content, isWatch = false }: PreviewProps) {
         components={{
           // 优化 Apple Watch 上的标题显示
           h1: ({ node, ...props }) => (
-            <h1 {...props} style={isWatch ? { fontSize: '1.3em' } : undefined} />
+            <h1 {...props} style={isWatch ? { fontSize: '1.69em' } : undefined} />
           ),
           h2: ({ node, ...props }) => (
-            <h2 {...props} style={isWatch ? { fontSize: '1.2em' } : undefined} />
+            <h2 {...props} style={isWatch ? { fontSize: '1.56em' } : undefined} />
           ),
           h3: ({ node, ...props }) => (
-            <h3 {...props} style={isWatch ? { fontSize: '1.1em' } : undefined} />
+            <h3 {...props} style={isWatch ? { fontSize: '1.43em' } : undefined} />
           ),
         }}
       >
