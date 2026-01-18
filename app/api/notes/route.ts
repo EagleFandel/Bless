@@ -12,15 +12,16 @@ async function ensureDbInitialized() {
   }
 }
 
+// 单用户模式 - 固定使用同一个 ID
+const SINGLE_USER_ID = "default-user";
+
 // 获取笔记
 export async function GET(request: NextRequest) {
   await ensureDbInitialized();
-  
-  const deviceId = request.headers.get("x-device-id") || "default";
 
   try {
     const note = await prisma.note.findFirst({
-      where: { deviceId },
+      where: { deviceId: SINGLE_USER_ID },
       orderBy: { updatedAt: "desc" },
     });
 
@@ -35,13 +36,11 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   await ensureDbInitialized();
   
-  const deviceId = request.headers.get("x-device-id") || "default";
-  
   try {
     const { content } = await request.json();
 
     const existingNote = await prisma.note.findFirst({
-      where: { deviceId },
+      where: { deviceId: SINGLE_USER_ID },
     });
 
     if (existingNote) {
@@ -51,7 +50,7 @@ export async function POST(request: NextRequest) {
       });
     } else {
       await prisma.note.create({
-        data: { content, deviceId },
+        data: { content, deviceId: SINGLE_USER_ID },
       });
     }
 

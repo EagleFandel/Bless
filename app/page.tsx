@@ -5,15 +5,8 @@ import Editor from "@/components/Editor";
 import Preview from "@/components/Preview";
 import { useDeviceDetect } from "@/hooks/useDeviceDetect";
 
-// 获取设备唯一标识
-function getDeviceId() {
-  let deviceId = localStorage.getItem("formuless-device-id");
-  if (!deviceId) {
-    deviceId = `device-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
-    localStorage.setItem("formuless-device-id", deviceId);
-  }
-  return deviceId;
-}
+// 单用户模式 - 固定使用同一个 ID
+const SINGLE_USER_ID = "default-user";
 
 export default function Home() {
   const [content, setContent] = useState("");
@@ -23,17 +16,15 @@ export default function Home() {
 
   // 保存函数
   const saveContent = (contentToSave: string) => {
-    const deviceId = getDeviceId();
-    
     // 同时保存到 localStorage（降级方案）
     localStorage.setItem("formuless-content", contentToSave);
     
-    // 保存到服务器
+    // 保存到服务器（单用户模式）
     fetch("/api/notes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-device-id": deviceId,
+        "x-device-id": SINGLE_USER_ID,
       },
       body: JSON.stringify({ content: contentToSave }),
     }).catch(() => {
@@ -43,9 +34,8 @@ export default function Home() {
 
   // 从服务器加载内容
   useEffect(() => {
-    const deviceId = getDeviceId();
     fetch("/api/notes", {
-      headers: { "x-device-id": deviceId },
+      headers: { "x-device-id": SINGLE_USER_ID },
     })
       .then((res) => res.json())
       .then((data) => {
