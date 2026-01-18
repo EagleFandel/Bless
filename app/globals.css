@@ -5,13 +5,16 @@
 /* KaTeX CSS */
 @import 'katex/dist/katex.min.css';
 
+/* 深色主题 */
 body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
 }
 
-/* 极简编辑器样式 */
+/* 极简编辑器样式 - 深色 */
 .editor {
   width: 100%;
   height: 100%;
@@ -22,6 +25,74 @@ body {
   line-height: 1.6;
   resize: none;
   box-sizing: border-box;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+.editor::placeholder {
+  color: #666;
+}
+
+/* 预览区域 - 深色 */
+.preview {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+.preview h1, .preview h2, .preview h3, .preview h4, .preview h5, .preview h6 {
+  color: #ffffff;
+}
+
+.preview a {
+  color: #60a5fa;
+}
+
+.preview code {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+.preview pre {
+  background-color: #2d2d2d;
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.preview pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.preview blockquote {
+  border-left: 4px solid #444;
+  padding-left: 1em;
+  color: #999;
+}
+
+.preview table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.preview th, .preview td {
+  border: 1px solid #444;
+  padding: 0.5em;
+}
+
+.preview th {
+  background-color: #2d2d2d;
+}
+
+/* KaTeX 深色主题适配 */
+.katex {
+  color: #e0e0e0 !important;
+}
+
+.katex .mord, .katex .mop, .katex .mbin, .katex .mrel {
+  color: #e0e0e0 !important;
 }
 
 /* Apple Watch 优化 */

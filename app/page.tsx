@@ -83,7 +83,7 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-[#1a1a1a]">
         <div className="text-gray-400">加载中...</div>
       </div>
     );
@@ -92,7 +92,7 @@ export default function Home() {
   // Apple Watch: 纯阅读模式
   if (isWatch) {
     return (
-      <div className="min-h-screen bg-black text-white p-2">
+      <div className="min-h-screen bg-[#1a1a1a] text-white p-2">
         <Preview content={content} isWatch={true} />
       </div>
     );
@@ -101,14 +101,14 @@ export default function Home() {
   // 手机端: 可切换的编辑/预览模式
   if (isMobile) {
     return (
-      <div className="min-h-screen bg-white relative">
+      <div className="min-h-screen bg-[#1a1a1a] relative">
         {/* 下拉刷新指示器 */}
         <PullToRefreshIndicator {...pullToRefresh} />
         
         {/* 模式切换按钮 */}
         <button
           onClick={handleModeToggle}
-          className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+          className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
         >
           {isEditMode ? (
             <>
@@ -131,7 +131,7 @@ export default function Home() {
         {isEditMode ? (
           <Editor content={content} onChange={setContent} />
         ) : (
-          <div className="overflow-auto bg-gray-50 min-h-screen pt-16 px-4">
+          <div className="overflow-auto bg-[#1a1a1a] min-h-screen pt-16 px-4">
             <Preview content={content} />
           </div>
         )}
@@ -141,11 +141,11 @@ export default function Home() {
 
   // 桌面端: 默认预览模式，可切换到编辑或分栏模式
   return (
-    <div className="flex h-screen relative">
+    <div className="flex h-screen relative bg-[#1a1a1a]">
       {/* 模式切换按钮 */}
       <button
         onClick={handleModeToggle}
-        className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+        className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
       >
         {isEditMode ? (
           <>
@@ -168,16 +168,16 @@ export default function Home() {
       {isEditMode ? (
         // 编辑模式：左右分栏
         <>
-          <div className="w-1/2 border-r">
+          <div className="w-1/2 border-r border-gray-700">
             <Editor content={content} onChange={setContent} />
           </div>
-          <div className="w-1/2 overflow-auto bg-gray-50">
+          <div className="w-1/2 overflow-auto bg-[#1a1a1a]">
             <Preview content={content} />
           </div>
         </>
       ) : (
         // 预览模式：全屏预览
-        <div className="w-full overflow-auto bg-gray-50 p-8">
+        <div className="w-full overflow-auto bg-[#1a1a1a] p-8">
           <Preview content={content} />
         </div>
       )}

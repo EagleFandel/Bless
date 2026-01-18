@@ -68,12 +68,12 @@ export default function Editor({ content, onChange }: EditorProps) {
   };
 
   return (
-    <div className="relative h-full flex flex-col">
+    <div className="relative h-full flex flex-col bg-[#1a1a1a]">
       {/* 工具栏 */}
-      <div className="flex gap-2 p-2 border-b bg-gray-50 flex-shrink-0">
+      <div className="flex gap-2 p-2 border-b border-gray-700 bg-[#0d0d0d] flex-shrink-0">
         <button
           onClick={handleSelectAll}
-          className="px-3 py-1.5 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors text-sm flex items-center gap-1"
+          className="px-3 py-1.5 bg-[#2d2d2d] border border-gray-600 rounded hover:bg-[#3d3d3d] transition-colors text-sm flex items-center gap-1 text-gray-200"
           title="全选 (Ctrl+A)"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,7 +84,7 @@ export default function Editor({ content, onChange }: EditorProps) {
         
         <button
           onClick={handlePaste}
-          className="px-3 py-1.5 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors text-sm flex items-center gap-1"
+          className="px-3 py-1.5 bg-[#2d2d2d] border border-gray-600 rounded hover:bg-[#3d3d3d] transition-colors text-sm flex items-center gap-1 text-gray-200"
           title={hasSelection ? "粘贴并替换选中内容" : "在末尾粘贴 (Ctrl+V)"}
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +94,7 @@ export default function Editor({ content, onChange }: EditorProps) {
         </button>
         
         {hasSelection && (
-          <span className="text-xs text-gray-500 self-center ml-2">
+          <span className="text-xs text-gray-400 self-center ml-2">
             已选中文本
           </span>
         )}

@@ -17,13 +17,13 @@ export default function PullToRefreshIndicator({
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 flex items-center justify-center transition-all duration-200 z-40"
+      className="fixed top-0 left-0 right-0 flex items-center justify-center transition-all duration-200 z-40 bg-[#1a1a1a]"
       style={{
         height: `${pullDistance}px`,
         opacity: Math.min(pullDistance / 80, 1),
       }}
     >
-      <div className="flex flex-col items-center gap-2 text-gray-600">
+      <div className="flex flex-col items-center gap-2 text-gray-300">
         {isRefreshing ? (
           <>
             <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
