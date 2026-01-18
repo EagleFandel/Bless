@@ -100,10 +100,10 @@ export default function Editor({ content, onChange }: EditorProps) {
         </button>
       </div>
 
-      {/* 编辑器 */}
+      {/* 编辑器 - 为底部按钮留出空间 */}
       <textarea
         ref={textareaRef}
-        className="editor flex-1"
+        className="editor flex-1 pb-20"
         value={content}
         onChange={(e) => onChange(e.target.value)}
         onSelect={checkSelection}
