@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Editor from "@/components/Editor";
-import SmartPreview from "@/components/SmartPreview";
+import Preview from "@/components/Preview";
 import { useDeviceDetect } from "@/hooks/useDeviceDetect";
 
 // 获取设备唯一标识
@@ -77,7 +77,7 @@ export default function Home() {
   if (isWatch) {
     return (
       <div className="min-h-screen bg-black text-white p-2">
-        <SmartPreview content={content} isWatch={true} />
+        <Preview content={content} isWatch={true} />
       </div>
     );
   }
@@ -98,7 +98,7 @@ export default function Home() {
         <Editor content={content} onChange={setContent} />
       </div>
       <div className="w-1/2 overflow-auto bg-gray-50">
-        <SmartPreview content={content} />
+        <Preview content={content} />
       </div>
     </div>
   );
