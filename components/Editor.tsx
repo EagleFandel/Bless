@@ -69,17 +69,17 @@ export default function Editor({ content, onChange }: EditorProps) {
 
   return (
     <div className="relative h-full flex flex-col bg-[#1a1a1a]">
-      {/* 工具栏 */}
-      <div className="flex justify-end gap-2 p-2 border-b border-gray-700 bg-[#0d0d0d] flex-shrink-0">
+      {/* 工具栏 - 手机端优化 */}
+      <div className="flex justify-end gap-2 p-2 border-b border-gray-700 bg-[#0d0d0d] flex-shrink-0 overflow-x-auto">
         {hasSelection && (
-          <span className="text-xs text-gray-400 self-center mr-auto">
-            已选中文本
+          <span className="text-xs text-gray-400 self-center mr-auto whitespace-nowrap">
+            已选中
           </span>
         )}
         
         <button
           onClick={handleSelectAll}
-          className="px-3 py-1.5 bg-[#2d2d2d] border border-gray-600 rounded hover:bg-[#3d3d3d] transition-colors text-sm flex items-center gap-1 text-gray-200"
+          className="px-3 py-2 bg-[#2d2d2d] border border-gray-600 rounded hover:bg-[#3d3d3d] active:bg-[#4d4d4d] transition-colors text-sm flex items-center gap-1.5 text-gray-200 whitespace-nowrap touch-manipulation"
           title="全选 (Ctrl+A)"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@ export default function Editor({ content, onChange }: EditorProps) {
         
         <button
           onClick={handlePaste}
-          className="px-3 py-1.5 bg-[#2d2d2d] border border-gray-600 rounded hover:bg-[#3d3d3d] transition-colors text-sm flex items-center gap-1 text-gray-200"
+          className="px-3 py-2 bg-[#2d2d2d] border border-gray-600 rounded hover:bg-[#3d3d3d] active:bg-[#4d4d4d] transition-colors text-sm flex items-center gap-1.5 text-gray-200 whitespace-nowrap touch-manipulation"
           title={hasSelection ? "粘贴并替换选中内容" : "在末尾粘贴 (Ctrl+V)"}
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,11 +109,14 @@ export default function Editor({ content, onChange }: EditorProps) {
         onSelect={checkSelection}
         onMouseUp={checkSelection}
         onKeyUp={checkSelection}
+        onTouchEnd={checkSelection}
         placeholder="开始输入...
 
 支持 Markdown 和 LaTeX 公式
 例如: $E = mc^2$"
         spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
       />
     </div>
   );

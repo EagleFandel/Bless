@@ -89,30 +89,32 @@ export default function Home() {
     );
   }
 
-  // Apple Watch: 纯阅读模式
+  // Apple Watch: 纯阅读模式 - 优化超小屏幕显示
   if (isWatch) {
     return (
-      <div className="min-h-screen bg-[#1a1a1a] text-white p-2">
-        <Preview content={content} isWatch={true} />
+      <div className="min-h-screen bg-[#1a1a1a] text-white p-1">
+        <div className="preview-watch">
+          <Preview content={content} isWatch={true} />
+        </div>
       </div>
     );
   }
 
-  // 手机端: 可切换的编辑/预览模式
+  // 手机端: 默认编辑模式，可切换到预览
   if (isMobile) {
     return (
       <div className="min-h-screen bg-[#1a1a1a] relative">
         {/* 下拉刷新指示器 */}
         <PullToRefreshIndicator {...pullToRefresh} />
         
-        {/* 模式切换按钮 */}
+        {/* 模式切换按钮 - 手机端优化 */}
         <button
           onClick={handleModeToggle}
-          className="fixed top-4 right-4 z-50 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          className="fixed top-3 right-3 z-50 px-3 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors flex items-center gap-1.5 text-sm"
         >
           {isEditMode ? (
             <>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
@@ -120,7 +122,7 @@ export default function Home() {
             </>
           ) : (
             <>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
               编辑
@@ -131,7 +133,7 @@ export default function Home() {
         {isEditMode ? (
           <Editor content={content} onChange={setContent} />
         ) : (
-          <div className="overflow-auto bg-[#1a1a1a] min-h-screen pt-16 px-4">
+          <div className="overflow-auto bg-[#1a1a1a] min-h-screen pt-14 px-3">
             <Preview content={content} />
           </div>
         )}

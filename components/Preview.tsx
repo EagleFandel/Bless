@@ -11,10 +11,22 @@ interface PreviewProps {
 
 export default function Preview({ content, isWatch = false }: PreviewProps) {
   return (
-    <div className={`preview p-6 ${isWatch ? "text-sm" : ""}`}>
+    <div className={`preview ${isWatch ? "preview-watch" : "p-6"}`}>
       <ReactMarkdown
         remarkPlugins={[remarkMath]}
         rehypePlugins={[rehypeKatex]}
+        components={{
+          // 优化 Apple Watch 上的标题显示
+          h1: ({ node, ...props }) => (
+            <h1 {...props} style={isWatch ? { fontSize: '1.3em' } : undefined} />
+          ),
+          h2: ({ node, ...props }) => (
+            <h2 {...props} style={isWatch ? { fontSize: '1.2em' } : undefined} />
+          ),
+          h3: ({ node, ...props }) => (
+            <h3 {...props} style={isWatch ? { fontSize: '1.1em' } : undefined} />
+          ),
+        }}
       >
         {content}
       </ReactMarkdown>

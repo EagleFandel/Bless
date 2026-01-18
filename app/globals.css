@@ -157,13 +157,75 @@ body {
   color: #e0e0e0 !important;
 }
 
-/* Apple Watch 优化 */
-@media (max-width: 200px) {
+/* Apple Watch 优化 - 超小屏幕 */
+@media (max-width: 250px) {
   body {
-    font-size: 12px;
+    font-size: 11px;
+    line-height: 1.4;
   }
-  .preview {
-    padding: 0.5rem;
+  
+  .preview-watch {
+    padding: 0.25rem;
+    font-size: 11px;
+  }
+  
+  .preview-watch h1 {
+    font-size: 1.3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+  }
+  
+  .preview-watch h2 {
+    font-size: 1.2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+  }
+  
+  .preview-watch h3 {
+    font-size: 1.1em;
+    margin-top: 0.4em;
+    margin-bottom: 0.2em;
+  }
+  
+  .preview-watch p {
+    margin-bottom: 0.5em;
+  }
+  
+  .preview-watch code {
+    font-size: 0.85em;
+    padding: 0.1em 0.2em;
+  }
+  
+  .preview-watch pre {
+    padding: 0.5em;
+    font-size: 0.85em;
+    overflow-x: auto;
+  }
+  
+  .preview-watch ul, .preview-watch ol {
+    padding-left: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  
+  .preview-watch li {
+    margin-bottom: 0.2em;
+  }
+  
+  .preview-watch table {
+    font-size: 0.85em;
+  }
+  
+  .preview-watch th, .preview-watch td {
+    padding: 0.25em;
+  }
+  
+  /* KaTeX 公式在 Watch 上的优化 */
+  .preview-watch .katex {
+    font-size: 0.9em;
+  }
+  
+  .preview-watch .katex-display {
+    margin: 0.5em 0;
   }
 }
 
@@ -171,6 +233,44 @@ body {
 @media (max-width: 768px) {
   .editor {
     font-size: 16px;
-    padding: 1rem;
+    padding: 0.75rem;
+  }
+  
+  /* 防止 iOS 自动缩放 */
+  .editor, input, textarea {
+    font-size: 16px !important;
+  }
+  
+  /* 手机端预览优化 */
+  .preview {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  
+  .preview h1 {
+    font-size: 1.75em;
+  }
+  
+  .preview h2 {
+    font-size: 1.5em;
+  }
+  
+  .preview h3 {
+    font-size: 1.25em;
+  }
+  
+  .preview code {
+    font-size: 0.9em;
+  }
+  
+  .preview pre {
+    font-size: 0.85em;
+    overflow-x: auto;
+  }
+  
+  .preview table {
+    font-size: 0.9em;
+    display: block;
+    overflow-x: auto;
   }
 }
