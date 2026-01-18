@@ -92,11 +92,11 @@ export default function Home() {
   // Apple Watch: 纯阅读模式 - 极简设计，支持滚轮刷新
   if (isWatch) {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-black text-white m-0 p-0 w-full overflow-x-hidden">
         {/* 下拉刷新指示器 - Watch 专用 */}
         <PullToRefreshIndicator {...pullToRefresh} />
         
-        <div className="preview-watch">
+        <div className="preview-watch w-full">
           <Preview content={content} isWatch={true} />
         </div>
       </div>

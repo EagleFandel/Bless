@@ -164,74 +164,98 @@ body {
     line-height: 1.6;
     background-color: #000;
     color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
   
   .preview-watch {
-    padding: 0.2rem;
+    padding: 0;
+    margin: 0;
     font-size: 12px;
+    width: 100vw;
+    min-height: 100vh;
+    box-sizing: border-box;
   }
   
   .preview-watch h1 {
-    font-size: 1.5em;
-    margin: 0.6em 0 0.3em 0;
+    font-size: 1.3em;
+    margin: 0.4em 0 0.2em 0;
     font-weight: 600;
     border-bottom: none;
+    padding: 0;
   }
   
   .preview-watch h2 {
-    font-size: 1.4em;
-    margin: 0.5em 0 0.3em 0;
-    font-weight: 600;
-    border-bottom: none;
-  }
-  
-  .preview-watch h3 {
-    font-size: 1.3em;
-    margin: 0.5em 0 0.2em 0;
-    font-weight: 600;
-  }
-  
-  .preview-watch h4, .preview-watch h5, .preview-watch h6 {
     font-size: 1.2em;
     margin: 0.4em 0 0.2em 0;
     font-weight: 600;
+    border-bottom: none;
+    padding: 0;
+  }
+  
+  .preview-watch h3 {
+    font-size: 1.1em;
+    margin: 0.3em 0 0.2em 0;
+    font-weight: 600;
+    padding: 0;
+  }
+  
+  .preview-watch h4, .preview-watch h5, .preview-watch h6 {
+    font-size: 1em;
+    margin: 0.3em 0 0.2em 0;
+    font-weight: 600;
+    padding: 0;
   }
   
   .preview-watch p {
-    margin: 0 0 0.5em 0;
+    margin: 0 0 0.4em 0;
+    padding: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .preview-watch code {
-    font-size: 0.95em;
-    padding: 0.1em 0.3em;
+    font-size: 0.9em;
+    padding: 0.1em 0.2em;
     background-color: #222;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .preview-watch pre {
     padding: 0.3em;
-    font-size: 0.9em;
+    margin: 0.3em 0;
+    font-size: 0.85em;
     overflow-x: auto;
     background-color: #222;
-    margin: 0.4em 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .preview-watch ul, .preview-watch ol {
-    padding-left: 1.5em;
-    margin: 0 0 0.5em 0;
+    padding-left: 1.2em;
+    margin: 0 0 0.4em 0;
   }
   
   .preview-watch li {
-    margin-bottom: 0.3em;
+    margin-bottom: 0.2em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .preview-watch table {
-    font-size: 0.9em;
-    margin: 0.4em 0;
+    font-size: 0.85em;
+    margin: 0.3em 0;
+    width: 100%;
+    table-layout: fixed;
   }
   
   .preview-watch th, .preview-watch td {
-    padding: 0.3em;
+    padding: 0.2em;
     border-color: #333;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .preview-watch th {
@@ -240,23 +264,34 @@ body {
   
   .preview-watch blockquote {
     border-left-color: #444;
-    padding-left: 0.6em;
-    margin: 0.4em 0;
+    padding-left: 0.5em;
+    margin: 0.3em 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .preview-watch hr {
     border-top-color: #333;
-    margin: 0.8em 0;
+    margin: 0.5em 0;
   }
   
   /* KaTeX 公式在 Watch 上的优化 */
   .preview-watch .katex {
-    font-size: 1em;
+    font-size: 0.9em;
+    overflow-x: auto;
+    max-width: 100%;
   }
   
   .preview-watch .katex-display {
-    margin: 0.5em 0;
+    margin: 0.3em 0;
     overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  /* 确保所有内容不超出屏幕 */
+  .preview-watch * {
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   /* 极简滚动条 */
