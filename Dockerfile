@@ -3,7 +3,7 @@ FROM node:20-alpine AS base
 
 # 安装依赖阶段
 FROM base AS deps
-RUN apk add --no-cache libc6-compat openssl
+RUN apk add --no-cache libc6-compat openssl openssl-dev
 WORKDIR /app
 
 COPY package*.json ./
@@ -22,6 +22,9 @@ COPY . .
 # 生成 Prisma Client
 RUN npx prisma generate
 
+# 确保 public 目录存在
+RUN mkdir -p public
+
 # 构建 Next.js
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
@@ -30,6 +33,9 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 
+# 安装运行时需要的 OpenSSL
+RUN apk add --no-cache openssl openssl-dev
+
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -37,11 +43,11 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # 复制必要文件
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
 
 # 创建数据库目录并设置权限
 RUN mkdir -p /app/prisma && chown -R nextjs:nodejs /app/prisma
