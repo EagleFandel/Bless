@@ -115,7 +115,7 @@ export default function Home() {
           {isEditMode ? (
             <Editor content={content} onChange={setContent} />
           ) : (
-            <div className="overflow-auto bg-[#1a1a1a] h-full px-3 pt-3">
+            <div className="overflow-auto bg-[#1a1a1a] h-full pt-3">
               <Preview content={content} />
             </div>
           )}
@@ -187,7 +187,7 @@ export default function Home() {
         </>
       ) : (
         // 预览模式：全屏预览
-        <div className="w-full overflow-auto bg-[#1a1a1a] p-8">
+        <div className="w-full overflow-auto bg-[#1a1a1a]">
           <Preview content={content} />
         </div>
       )}
