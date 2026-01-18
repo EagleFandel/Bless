@@ -14,13 +14,14 @@ body {
 /* 极简编辑器样式 */
 .editor {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   padding: 1rem;
   border: none;
   outline: none;
   font-size: 16px;
   line-height: 1.6;
   resize: none;
+  box-sizing: border-box;
 }
 
 /* Apple Watch 优化 */
