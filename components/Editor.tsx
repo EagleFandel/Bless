@@ -110,10 +110,7 @@ export default function Editor({ content, onChange }: EditorProps) {
         onMouseUp={checkSelection}
         onKeyUp={checkSelection}
         onTouchEnd={checkSelection}
-        placeholder="开始输入...
-
-支持 Markdown 和 LaTeX 公式
-例如: $E = mc^2$"
+        placeholder="开始输入... 支持 Markdown 和 LaTeX 公式"
         spellCheck={false}
         autoCapitalize="off"
         autoCorrect="off"
