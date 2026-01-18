@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import Editor from "@/components/Editor";
 import Preview from "@/components/Preview";
+import PullToRefreshIndicator from "@/components/PullToRefresh";
 import { useDeviceDetect } from "@/hooks/useDeviceDetect";
+import { usePullToRefresh } from "@/hooks/usePullToRefresh";
 
 // 单用户模式 - 固定使用同一个 ID
 const SINGLE_USER_ID = "default-user";
@@ -13,6 +15,31 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false); // 默认预览模式
   const { isWatch, isMobile } = useDeviceDetect();
+
+  // 从服务器加载内容
+  const loadContent = async () => {
+    try {
+      const res = await fetch("/api/notes", {
+        headers: { "x-device-id": SINGLE_USER_ID },
+      });
+      const data = await res.json();
+      setContent(data.content || "");
+    } catch {
+      // 降级到 localStorage
+      const saved = localStorage.getItem("formuless-content");
+      if (saved) setContent(saved);
+    }
+  };
+
+  // 下拉刷新
+  const handleRefresh = async () => {
+    await loadContent();
+  };
+
+  const pullToRefresh = usePullToRefresh({
+    onRefresh: handleRefresh,
+    threshold: 80,
+  });
 
   // 保存函数
   const saveContent = (contentToSave: string) => {
@@ -34,20 +61,7 @@ export default function Home() {
 
   // 从服务器加载内容
   useEffect(() => {
-    fetch("/api/notes", {
-      headers: { "x-device-id": SINGLE_USER_ID },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setContent(data.content || "");
-        setIsLoading(false);
-      })
-      .catch(() => {
-        // 降级到 localStorage
-        const saved = localStorage.getItem("formuless-content");
-        if (saved) setContent(saved);
-        setIsLoading(false);
-      });
+    loadContent().finally(() => setIsLoading(false));
   }, []);
 
   // 自动保存到服务器
@@ -88,6 +102,9 @@ export default function Home() {
   if (isMobile) {
     return (
       <div className="min-h-screen bg-white relative">
+        {/* 下拉刷新指示器 */}
+        <PullToRefreshIndicator {...pullToRefresh} />
+        
         {/* 模式切换按钮 */}
         <button
           onClick={handleModeToggle}
